@@ -19,6 +19,9 @@ const Navbar = () => {
           <div className="h-1 w-0 group-hover:w-full transition-all bg-accent" />
         </div>
         <div className="flex items-center gap-4">
+          <Link href="/blog" className="text-sm font-bold">
+            blog
+          </Link>
           <ThemeButton />
           {user ? <Profile /> : <LoginForm />}
         </div>

@@ -20,10 +20,10 @@ export default function MarkdownPreview({
 			className={cn("dark:text-gray-200 space-y-8", className)}
 			rehypePlugins={[rehypeHighlight]}
 			components={{
-				h1: ({ node, ...props }) => {
+				h1: ({ ...props }) => {
 					return <h1 {...props} className="text-3xl font-bold" />;
 				},
-				h2: ({ node, ...props }) => {
+				h2: ({ ...props }) => {
 					return (
 						<h1
 							{...props}
@@ -31,13 +31,16 @@ export default function MarkdownPreview({
 						/>
 					);
 				},
-				h3: ({ node, ...props }) => {
+				h3: ({ ...props }) => {
 					return (
 						<h1
 							{...props}
 							className="text-xl font-bold mt-10 mb-10"
 						/>
 					);
+				},
+				p: ({ ...props }) => {
+					return <p {...props} className="text-base hyphens-auto text-pretty" />;
 				},
 				code: ({ node, className, children, ...props }) => {
 					const match = /language-(\w+)/.exec(className || "");
@@ -50,13 +53,13 @@ export default function MarkdownPreview({
 						}
 
 						return (
-							<div className=" bg-graident-dark text-gray-300 border-[0.5px] rounded-md border-zinc-500">
+							<div className=" bg-gradient-dark text-gray-300 border-[0.5px] rounded-md border-zinc-500">
 								<div className="flex items-center justify-between px-5 py-2 border-b-[0.5px] border-zinc-500">
 									<div className="flex items-center gap-2">
 										<Icon />
 										<p className="text-sm text-gray-400">
 											{  
-                                                //@ts-ignore
+                                                
                                                 node?.data?.meta
                                             }
 										</p>

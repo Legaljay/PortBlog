@@ -1,0 +1,19 @@
+/* For Webkit browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: theme('colors.scrollbar-track');
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: theme('colors.scrollbar-thumb');
+    border-radius: 6px;
+  }
+  
+  /* For Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.scrollbar-thumb') theme('colors.scrollbar-track');
+  }

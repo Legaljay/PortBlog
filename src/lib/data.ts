@@ -75,7 +75,7 @@ export const blogs = [
 	},
 ];
 
-export const defaultCreateBlog: IBlogDetial = {
+export const defaultCreateBlog: IBlogDetail = {
 	id: "",
 	title: "",
 	image_url: "",

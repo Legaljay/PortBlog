@@ -1,5 +1,5 @@
 "use server";
-import { createServerClient, type CookieOptions } from "@supabase/ssr";
+import { createServerClient } from "@supabase/ssr"; //, type CookieOptions
 import { cookies } from "next/headers";
 import { Database } from "@/lib/types/supabase";
 import { createClient } from "@supabase/supabase-js";

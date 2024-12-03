@@ -4,7 +4,7 @@ import React from "react";
 import { toast } from "@/hooks/use-toast"
 import { defaultCreateBlog } from "@/lib/data";
 import { PostgrestSingleResponse } from "@supabase/supabase-js";
-import BlogForm from "../components/BlogForm";
+import BlogForm from "../../components/BlogForm";
 import { createBlog } from "../../../../lib/actions/blog";
 import { BlogFormSchemaType } from "../schema";
 import { useRouter } from "next/navigation";

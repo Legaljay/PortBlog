@@ -19,7 +19,7 @@ export type IBlogDetail = {
 		blog_id: string;
 		content: string;
 		created_at: string;
-	};
+	} | null;
 } | null;
 
 export type IBlogForm = {

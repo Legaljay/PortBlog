@@ -4,15 +4,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { toast } from "@/hooks/use-toast";
 import { Button } from "@ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -22,9 +19,10 @@ import {
   Pencil1Icon,
   RocketIcon,
   StarIcon,
+  ValueIcon,
 } from "@radix-ui/react-icons";
 import { useState, useTransition } from "react";
-import { BlogFormSchema, BlogFormSchemaType } from "../schema";
+import { BlogFormSchema, BlogFormSchemaType } from "../blog/schema";
 import { IBlogDetail } from "@/lib/types";
 import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utils";
@@ -49,7 +47,7 @@ export default function BLogForm({
     resolver: zodResolver(BlogFormSchema),
     defaultValues: {
       title: defaultBlog?.title,
-      content: defaultBlog?.blog_content.content,
+      content: defaultBlog?.blog_content?.content ?? "",
       image_url: defaultBlog?.image_url,
       is_premium: defaultBlog?.is_premium,
       is_published: defaultBlog?.is_published,
@@ -62,16 +60,6 @@ export default function BLogForm({
     });
   };
 
-  //   function onSubmit(data: z.infer<typeof FormSchema>) {
-  //     toast({
-  //       title: "You submitted the following values:",
-  //       description: (
-  //         <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-  //           <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-  //         </pre>
-  //       ),
-  //     })
-  //   }
 
   return (
     <Form {...form}>
@@ -82,7 +70,7 @@ export default function BLogForm({
             variant="outline"
             tabIndex={0}
             className="flex items-center gap-1 p-2 rounded-md hover:ring-2 hover:ring-zinc-400 transition-all"
-            onClick={() => setPreivew(!isPreview)}
+            onClick={() => setPreivew(!isPreview && !form.getFieldState("image_url").invalid)}
           >
             {isPreview ? (
               <>
@@ -133,10 +121,11 @@ export default function BLogForm({
           />
         </div>
         <Button
-          className="flex items-center gap-2"
+          type="submit"
+          className={cn("flex items-center gap-2")}
           disabled={!form.formState.isValid}
         >
-          <DownloadIcon /> Save
+          {!isPending ? <><DownloadIcon /> Save</> : <><ValueIcon className={isPending && "animate-spin"}/></>}
         </Button>
       </div>
       <form
@@ -160,7 +149,7 @@ export default function BLogForm({
                     placeholder="title"
                     {...field}
                     className={cn(
-                      "border-none text-lg font-medium leading-relaxed placeholder:text-sm",
+                      "text-sm bg-inherit font-medium leading-relaxed placeholder:text-sm",
                       isPreview ? "w-0 p-0" : "w-full lg:w-1/2"
                     )}
                   />
@@ -200,7 +189,7 @@ export default function BLogForm({
                     placeholder="image_url"
                     {...field}
                     className={cn(
-                      "border-none text-lg font-medium leading-relaxed placeholder:text-sm",
+                      "text-sm font-medium leading-relaxed placeholder:text-sm",
                       isPreview ? "w-0 p-0" : "w-full lg:w-1/2"
                     )}
                   />
@@ -249,7 +238,7 @@ export default function BLogForm({
                     placeholder="content"
                     {...field}
                     className={cn(
-                      "border-none text-lg font-medium leading-relaxed resize-none h-full placeholder:text-sm",
+                      "text-sm font-medium leading-relaxed resize-none h-full placeholder:text-sm",
                       isPreview ? "w-0 p-0" : "w-full lg:w-1/2"
                     )}
                   />

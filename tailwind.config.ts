@@ -1,11 +1,17 @@
 import type { Config } from "tailwindcss";
+import { createPreset } from 'fumadocs-ui/tailwind-plugin';
+import tailwindcssAnimate from "tailwindcss-animate";
 
 const config: Config = {
     darkMode: ["class"],
+	presets: [createPreset()],
     content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+	'./node_modules/fumadocs-ui/dist/**/*.js',
+    './content/**/*.mdx',
+    './mdx-components.tsx',
   ],
   theme: {
   	extend: {
@@ -58,7 +64,9 @@ const config: Config = {
   				'3': 'hsl(var(--chart-3))',
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
-  			}
+  			},
+			'scrollbar-thumb': '#888',
+        	'scrollbar-track': 'hsl(var(--background))',
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
@@ -67,6 +75,7 @@ const config: Config = {
   		}
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+//   plugins: [require("tailwindcss-animate")],
+plugins: [tailwindcssAnimate],
 };
 export default config;

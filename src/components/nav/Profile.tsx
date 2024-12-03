@@ -7,10 +7,12 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { DashboardIcon, LockOpen1Icon } from "@radix-ui/react-icons";
 import { createBrowserClient } from "@supabase/ssr";
+import { usePathname } from "next/navigation";
 
 const Profile = () => {
   const user = useUserStore((state) => state.user);
   const setUser = useUserStore((state) => state.setUser);
+  const pathname = usePathname();
 
   const supabase = createBrowserClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -25,7 +27,7 @@ const Profile = () => {
   const isAdmin = user?.user_metadata?.role === "admin";
 
   return (
-    <Popover>
+    <Popover key={pathname}>
       <PopoverTrigger>
         <Image
           src={user?.user_metadata?.avatar_url}

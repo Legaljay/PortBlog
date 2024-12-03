@@ -14,6 +14,7 @@ export async function createBlog(data: {
 	is_premium: boolean;
 	is_published: boolean;
 }) {
+     // eslint-disable-next-line
 	const { ["content"]: excludedKey, ...blog } = data;
 
 	const supabase = await createSupabaseServerClient();
@@ -27,7 +28,7 @@ export async function createBlog(data: {
 		return JSON.stringify(blogResult);
 	} else {
 		const result = await supabase
-			.from("blog_content")
+			.from("blog_content") // eslint-disable-next-line
 			.insert({ blog_id: blogResult?.data?.id!, content: data.content });
 
 		revalidatePath(DASHBOARD);
@@ -58,12 +59,13 @@ export async function readBlogById(blogId: string) {
 	const supabase = await createSupabaseServerClient();
 	return supabase.from("blog").select("*").eq("id", blogId).single();
 }
+
 export async function readBlogIds() {
 	const supabase = await createSupabaseServerClient();
 	return supabase.from("blog").select("id");
 }
 
-export async function readBlogDeatailById(blogId: string) {
+export async function readBlogDetailById(blogId: string) {
 	const supabase = await createSupabaseServerClient();
 	return await supabase
 		.from("blog")
@@ -94,6 +96,7 @@ export async function updateBlogDetail(
 	blogId: string,
 	data: BlogFormSchemaType
 ) {
+     // eslint-disable-next-line
 	const { ["content"]: excludedKey, ...blog } = data;
 
 	const supabase = await createSupabaseServerClient();

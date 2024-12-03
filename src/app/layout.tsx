@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import "./styles.css";  
 import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@components/nav/Navbar";
 import SessionProvider from "@/components/session-provider";
 import { Toaster } from "@/components/ui/toaster";
+import { RootProvider } from 'fumadocs-ui/provider';
+// import 'fumadocs-ui/style.css';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -38,7 +41,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <main className="max-w-7xl mx-auto p-10 space-y-10">
+          <main className="max-w-7xl mx-auto px-10 py-5 space-y-5 h-[100dvh]">
             <Navbar/>
             {children}
           </main>

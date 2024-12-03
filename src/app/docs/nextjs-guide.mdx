@@ -1,0 +1,83 @@
+---
+title: Getting Started with Next.js
+description: A comprehensive guide to getting started with Next.js
+date: 2024-01-01
+---
+
+# Getting Started with Next.js
+
+Next.js is a powerful React framework that makes building web applications simple and efficient.
+
+## Why Next.js?
+
+- Server-side rendering
+- Automatic code splitting
+- Simple page-based routing
+- API routes
+- Built-in image optimization
+
+## Basic Setup
+
+```bash
+npx create-next-app@latest my-app
+cd my-app
+npm run dev
+```
+
+## Project Structure
+
+```
+my-app/
+  ├── app/
+  │   ├── page.tsx
+  │   └── layout.tsx
+  ├── public/
+  │   └── images/
+  └── package.json
+```
+
+## Key Features
+
+### 1. Server Components
+
+Next.js 13+ introduces React Server Components:
+
+```tsx
+// app/page.tsx
+export default async function Page() {
+  const data = await getData() // This runs on the server!
+  return <main>{/* Your JSX */}</main>
+}
+```
+
+### 2. Data Fetching
+
+```tsx
+async function getData() {
+  const res = await fetch('https://api.example.com/data')
+  return res.json()
+}
+```
+
+### 3. Image Optimization
+
+```tsx
+import Image from 'next/image'
+
+export default function Header() {
+  return (
+    <Image
+      src="/profile.jpg"
+      alt="Profile"
+      width={500}
+      height={300}
+    />
+  )
+}
+```
+
+## Next Steps
+
+- Explore the [Next.js documentation](https://nextjs.org/docs)
+- Try building a small project
+- Learn about deployment options
